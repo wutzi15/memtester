@@ -9,8 +9,8 @@
  * Licensed under the terms of the GNU General Public License version 2 (only).
  * See the file COPYING for details.
  *
- * This file contains the declarations for external variables from the main file.
- * See other comments in that file.
+ * This file contains the declarations for external variables from the main
+ * file. See other comments in that file.
  *
  */
 

@@ -19,4 +19,4 @@ void out_wheel_start();
 void out_wheel_advance();
 void out_wheel_end();
 
-#endif // _OUTPUT_H_
+#endif  // _OUTPUT_H_
