@@ -1,3 +1,9 @@
+Version 4.5.2
+21 Feb 2024
+  - forked from original repo
+  - Added quickmode
+  - changed build system to CMake
+  
 Version 4.5.1
 30 May 2021
   -documentation-only update.
