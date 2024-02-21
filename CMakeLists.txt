@@ -12,4 +12,9 @@ endif(TEST_NARROW_WRITES)
 
 add_executable(memtester memtester.c output.c tests.c)
 
+add_custom_target(uninstall
+    COMMAND rm -f ${CMAKE_INSTALL_PREFIX}/memtester /usr/share/man/man8/memtester.8
+    )
+
 install(TARGETS memtester DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/memtester.8 DESTINATION /usr/share/man/man8)
