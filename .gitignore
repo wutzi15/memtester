@@ -8,3 +8,4 @@ make-compile
 make-load
 memtester
 systype
+build
