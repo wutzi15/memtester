@@ -12,7 +12,7 @@
  *
  */
 
-#define __version__ "4.5.1"
+#define __version__ "4.5.2"
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -33,6 +33,8 @@
 #define EXIT_FAIL_NONSTARTER    0x01
 #define EXIT_FAIL_ADDRESSLINES  0x02
 #define EXIT_FAIL_OTHERTEST     0x04
+
+int quick_test = 0; // default behaviour does not accelerate tests
 
 struct test tests[] = {
     { "Random Value", test_random_value },
@@ -103,7 +105,7 @@ off_t physaddrbase = 0;
 /* Function definitions */
 void usage(char *me) {
     fprintf(stderr, "\n"
-            "Usage: %s [-p physaddrbase [-d device] [-u]] <mem>[B|K|M|G] [loops]\n",
+            "Usage: %s [-p physaddrbase [-d device] [-u] [-q]] <mem>[B|K|M|G] [loops]\n",
             me);
     exit(EXIT_FAIL_NONSTARTER);
 }
@@ -154,8 +156,16 @@ int main(int argc, char **argv) {
         printf("using testmask 0x%lx\n", testmask);
     }
 
-    while ((opt = getopt(argc, argv, "p:d:u")) != -1) {
+    while ((opt = getopt(argc, argv, "qp:d:u")) != -1) {
         switch (opt) {
+            case 'q':
+                quick_test = 1;
+                if (!testmask) {
+                    /* right-to-left: (Stuck-is-always-on) and Rnd MUST be on Rnd,XOR,SUB,MUL DIV,OR,AND,Inc Bit,Seq,Checker,Spread Flip,Ones,Zeros[,8bit 16bit] */
+                    testmask = 0xE7;
+                    printf("using quick mode with testmask 0x%lx\n", testmask);
+                    break;
+                }
             case 'p':
                 errno = 0;
                 physaddrbase = (off_t) strtoull(optarg, &addrsuffix, 16);

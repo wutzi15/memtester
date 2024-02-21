@@ -71,7 +71,8 @@ int test_stuck_address(ulv *bufa, size_t count) {
     off_t physaddr;
 
     out_test_start();
-    for (j = 0; j < 16; j++) {
+    unsigned int loops = (quick_test) ? 2 : 16; 
+    for (j = 0; j < loops; j++) {
         p1 = (ulv *) bufa;
         out_test_setting(j);
         for (i = 0; i < count; i++) {
