@@ -1,9 +1,9 @@
-.TH memtester "8" "September 2020" "memtester 4" "Maintenance Commands"
+.TH memtester "8" "Feb 2024" "memtester 4" "Benedikt Bergenthal"
 .SH NAME
 memtester \- stress test to find memory subsystem faults.
 .SH SYNOPSIS
 .B memtester
-[\f -p PHYSADDR\fR [\f -d DEVICE\fR]]
+[\f -p PHYSADDR\fR [\f -d DEVICE\fR] [\f -q\fR]]
 <\fIMEMORY\fR>
 [\fIITERATIONS\fR]
 .SH DESCRIPTION
@@ -48,7 +48,8 @@ So choose wisely.
 \f -p PHYSADDR\fR
 tells memtester to test a specific region of memory starting at physical 
 address PHYSADDR (given in hex), by mmap(2)ing a device specified by the
--d option (below, or /dev/mem by default).  This is mostly of use to hardware 
+.TP 
+\f -d option \fR (below, or /dev/mem by default).  This is mostly of use to hardware 
 developers, for testing memory-mapped I/O devices and similar.
 Note that the memory region will be overwritten during testing, so it is not
 safe to specify memory which is allocated for the system or for other
@@ -56,13 +57,15 @@ applications; doing so will cause them to crash.  If you absolutely must test
 a particular region of actual physical memory, arrange to have that memory
 allocated by your test software, and hold it in this allocated state, then
 run memtester on it with this option.
+.TP 
+\f -q \fR Activate quickmode. This mode only runs two instead of 16 runs for the tests.
 .TP
-\fIMEMORY\fR
+\f IMEMORY\fR
 the amount of memory to allocate and test, in megabytes by default.  You can
 include a suffix of B, K, M, or G to indicate bytes, kilobytes, megabytes, or
 gigabytes respectively.
 .TP
-\fIITERATIONS\fR
+\f IITERATIONS\fR
 (optional) number of loops to iterate through.  Default is infinite.
 .SH ENVIRONMENT
 .PP
@@ -92,12 +95,16 @@ error during stuck address test
 \f0x04
 error during one of the other tests
 .SH AUTHOR
-Written by Charles Cazabon.
+Originally written by Charles Cazabon.
+.br
+Forked in 2024 by Benedikt Bergenthal.
 .SH "REPORTING BUGS"
-Report bugs to <charlesc-memtester-bugs@pyropus.ca>.
+Please open an issue on Github https://github.com/wutzi15/memtester
 .PP
 .SH COPYRIGHT
 Copyright \(co 2001-2020 Charles Cazabon
+.br
+2024 Benedikt Bergenthal
 .br
 This is free software; see the file COPYING for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

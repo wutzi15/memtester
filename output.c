@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
  * Copyright (C) 2022 Luca Ceresoli <luca@lucaceresoli.net>
- *
+ * 2024 Benedikt Bergenthal <mail@benedikt-bergenthal.de>
  * Output routines to conditionally show testing status.
  *
  * out_initialize() must be called at program startup and disabled status
